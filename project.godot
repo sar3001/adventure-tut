@@ -19,12 +19,21 @@ config/icon="res://icon.svg"
 
 SceneManager="*res://Scenes/SceneManager/scene_manager.tscn"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [file_customization]
 
 folder_colors={
 "res://Ninja Adventure - Asset Pack/": "green",
 "res://Scenes/": "blue"
 }
+
+[global_group]
+
+wall="a wall tilemap layer"
+pushable="objects that can be pushed"
 
 [input]
 
