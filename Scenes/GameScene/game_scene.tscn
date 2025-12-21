@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://cu4wn0yqmol53"]
+[gd_scene load_steps=17 format=4 uid="uid://cu4wn0yqmol53"]
 
 [ext_resource type="PackedScene" uid="uid://d0hdrurd0b7vf" path="res://Scenes/Player/player.tscn" id="1_2p8i2"]
 [ext_resource type="Texture2D" uid="uid://ufhsskvlljn6" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetFloor.png" id="1_l6yvh"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ggeev6q46c2l" path="res://Scenes/SceneEntrance/scene_entrance.tscn" id="5_oi8ly"]
 [ext_resource type="PackedScene" uid="uid://bvlkbuvs2jiqn" path="res://Scenes/Block/block.tscn" id="6_12ovb"]
 [ext_resource type="PackedScene" uid="uid://ck6t6bqhtyq10" path="res://Scenes/LockedDoor/locked_door.tscn" id="6_elpgg"]
+[ext_resource type="PackedScene" uid="uid://5kho3lpa6a0c" path="res://Scenes/NPC/npc.tscn" id="6_nr542"]
 [ext_resource type="PackedScene" uid="uid://d235yfccmv3q3" path="res://Scenes/PuzzleButton/puzzle_button.tscn" id="7_ohrk8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_04h35"]
@@ -812,6 +813,9 @@ motion_mode = 1
 [node name="Camera2D" type="Camera2D" parent="ObstacleLayer/Player"]
 position = Vector2(0, 1)
 zoom = Vector2(5, 5)
+
+[node name="NPC" parent="ObstacleLayer" instance=ExtResource("6_nr542")]
+position = Vector2(-26, -32)
 
 [node name="LockedDoor" parent="." instance=ExtResource("6_elpgg")]
 position = Vector2(336, -20)

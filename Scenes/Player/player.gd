@@ -13,6 +13,14 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+
+	move_player()
+
+	push_blocks()
+	
+	move_and_slide() # must put this at the end of process. Function that takes velocity and applies it to move the player. Without it, velocity does nothing.
+
+func move_player():
 	var move_vector: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	
 	velocity = move_vector * move_speed # Best practice to use velocity to move the player. Don't use position. Both velocity and move_vector are Vec2
@@ -35,6 +43,8 @@ func _physics_process(delta: float) -> void:
 	#elif velocity == Vector2(0,0): # alterternative way to write the above statement
 		#$AnimatedSprite2D.stop
 		
+func push_blocks():
+	
 	# get the last collision
 	# check if it's the block
 	#if it is the block, push it
@@ -50,6 +60,3 @@ func _physics_process(delta: float) -> void:
 			var collision_normal: Vector2 = collision.get_normal()
 			
 			collider_node.apply_central_force(-collision_normal * push_strength)
-		
-	
-	move_and_slide() # must put this at the end of process. Function that takes velocity and applies it to move the player. Without it, velocity does nothing.

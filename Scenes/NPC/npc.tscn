@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://5kho3lpa6a0c"]
+
+[ext_resource type="Texture2D" uid="uid://cwm8yydnjms5m" path="res://Ninja Adventure - Asset Pack/Actor/Characters/NinjaBlue2/SpriteSheet.png" id="1_3am0f"]
+[ext_resource type="Script" uid="uid://c3i3s6nhtfu2h" path="res://Scenes/NPC/npc.gd" id="1_bjna2"]
+[ext_resource type="Texture2D" uid="uid://bs52thqlv3420" path="res://Ninja Adventure - Asset Pack/Ui/Dialog/DialogBoxFaceset.png" id="3_0s07e"]
+[ext_resource type="Texture2D" uid="uid://dwqiscj28uxis" path="res://Ninja Adventure - Asset Pack/Actor/Characters/NinjaBlue2/Faceset.png" id="4_aqj1y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjna2"]
+atlas = ExtResource("1_3am0f")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0s07e"]
+size = Vector2(14, 14)
+
+[sub_resource type="LabelSettings" id="LabelSettings_n8r46"]
+font_size = 48
+font_color = Color(0.098098494, 0.098098524, 0.09809851, 1)
+
+[node name="NPC" type="StaticBody2D"]
+script = ExtResource("1_bjna2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_bjna2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_0s07e")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+offset_left = 16.0
+offset_top = 398.0
+offset_right = 316.0
+offset_bottom = 456.0
+scale = Vector2(3.7, 3.7)
+texture = ExtResource("3_0s07e")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/TextureRect"]
+layout_mode = 0
+offset_left = 4.864865
+offset_top = 14.594594
+offset_right = 42.864864
+offset_bottom = 52.594593
+texture = ExtResource("4_aqj1y")
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 219.0
+offset_top = 463.0
+offset_right = 503.0
+offset_bottom = 530.0
+text = "Hello, World!"
+label_settings = SubResource("LabelSettings_n8r46")
