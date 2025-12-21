@@ -22,3 +22,7 @@ func _on_body_entered(body: Node2D) -> void:
 func _on_body_exited(body) -> void:
 	pass # Replace with function body.
 	
+
+
+func _on_puzzle_button_3_pressed() -> void:
+	pass # Replace with function body.
