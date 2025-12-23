@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://5kho3lpa6a0c"]
+[gd_scene load_steps=9 format=3 uid="uid://5kho3lpa6a0c"]
 
 [ext_resource type="Texture2D" uid="uid://cwm8yydnjms5m" path="res://Ninja Adventure - Asset Pack/Actor/Characters/NinjaBlue2/SpriteSheet.png" id="1_3am0f"]
 [ext_resource type="Script" uid="uid://c3i3s6nhtfu2h" path="res://Scenes/NPC/npc.gd" id="1_bjna2"]
@@ -16,7 +16,10 @@ size = Vector2(14, 14)
 font_size = 48
 font_color = Color(0.098098494, 0.098098524, 0.09809851, 1)
 
-[node name="NPC" type="StaticBody2D"]
+[sub_resource type="LabelSettings" id="LabelSettings_aqj1y"]
+font_size = 28
+
+[node name="NPC" type="StaticBody2D" groups=["interactable"]]
 script = ExtResource("1_bjna2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -29,7 +32,7 @@ shape = SubResource("RectangleShape2D_0s07e")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 visible = false
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+[node name="DialogBoxTexture" type="TextureRect" parent="CanvasLayer"]
 offset_left = 16.0
 offset_top = 398.0
 offset_right = 316.0
@@ -37,7 +40,7 @@ offset_bottom = 456.0
 scale = Vector2(3.7, 3.7)
 texture = ExtResource("3_0s07e")
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/TextureRect"]
+[node name="NPCIcon" type="TextureRect" parent="CanvasLayer/DialogBoxTexture"]
 layout_mode = 0
 offset_left = 4.864865
 offset_top = 14.594594
@@ -45,10 +48,20 @@ offset_right = 42.864864
 offset_bottom = 52.594593
 texture = ExtResource("4_aqj1y")
 
-[node name="Label" type="Label" parent="CanvasLayer"]
-offset_left = 219.0
-offset_top = 463.0
-offset_right = 503.0
-offset_bottom = 530.0
-text = "Hello, World!"
+[node name="DialogLabel" type="Label" parent="CanvasLayer"]
+offset_left = 207.0
+offset_top = 455.0
+offset_right = 1102.0
+offset_bottom = 590.0
+text = "Hello, World "
 label_settings = SubResource("LabelSettings_n8r46")
+autowrap_mode = 3
+
+[node name="NameLabel" type="Label" parent="CanvasLayer"]
+offset_left = 36.0
+offset_top = 399.0
+offset_right = 267.0
+offset_bottom = 438.0
+text = "Blue Ninja"
+label_settings = SubResource("LabelSettings_aqj1y")
+horizontal_alignment = 1

@@ -33,6 +33,7 @@ folder_colors={
 [global_group]
 
 pushable="objects that can be pushed"
+interactable="objects that can interact"
 
 [input]
 

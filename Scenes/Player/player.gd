@@ -27,15 +27,19 @@ func move_player():
 	
 	if velocity.x > 0:
 		$AnimatedSprite2D.play("move_right")
+		$InteractArea2D.position = Vector2(5, 2)
 		
 	elif velocity.x < 0:
 		$AnimatedSprite2D.play("move_left")
+		$InteractArea2D.position = Vector2(-5, 2)
 		
 	elif velocity.y < 0:
 		$AnimatedSprite2D.play("move_up")
+		$InteractArea2D.position = Vector2(0, -4)
 		
 	elif velocity.y > 0:
 		$AnimatedSprite2D.play("move_down")
+		$InteractArea2D.position = Vector2(0, 8)
 		
 	else:
 		$AnimatedSprite2D.stop()
@@ -60,3 +64,13 @@ func push_blocks():
 			var collision_normal: Vector2 = collision.get_normal()
 			
 			collider_node.apply_central_force(-collision_normal * push_strength)
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.is_in_group("interactable"):
+		body.can_interact = true
+
+
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	if body.is_in_group("interactable"):
+		body.can_interact = false
