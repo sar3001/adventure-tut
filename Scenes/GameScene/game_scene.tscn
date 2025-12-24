@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://cu4wn0yqmol53"]
+[gd_scene load_steps=23 format=4 uid="uid://cu4wn0yqmol53"]
 
 [ext_resource type="PackedScene" uid="uid://d0hdrurd0b7vf" path="res://Scenes/Player/player.tscn" id="1_2p8i2"]
 [ext_resource type="Texture2D" uid="uid://ufhsskvlljn6" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetFloor.png" id="1_l6yvh"]
@@ -786,16 +786,13 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_kr7le")
 sources/1 = SubResource("TileSetAtlasSource_12ovb")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dc78n"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_g3lhp"]
 atlas = ExtResource("7_g3lhp")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_njm7v"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_6qy3m"]
 atlas = ExtResource("9_6qy3m")
 region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6qy3m"]
-load_path = "res://.godot/imported/DialogBoxFaceset.png-829d2cd99fcc35c993f21457a517daef.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_elpgg"]
 size = Vector2(81.375, 14.5)
@@ -822,6 +819,26 @@ position = Vector2(8, 8)
 tile_map_data = PackedByteArray("AAAAAAUAAAAAAAIAAAAEAAgAAAAAAAIAAAABAAcAAAAAAAIAAAD//wkAAAAAAAIAAAAHAAAAAAAAAAIAAAAFAP//AAAAAAIAAAAJAP7/AAAAAAIAAAD4/wwAAAAAAAIAAAD2/wsAAAAAAAIAAAD6/woAAAAAAAIAAAD4/wkAAAAAAAIAAAD7/wwAAAAAAAIAAAD2/w4AAAAAAAIAAADz/w4AAAAAAAIAAAD9/w4AAAAAAAIAAAAJAPv/AAAAAAIAAAALAPn/AAAAAAIAAAAHAPn/AAAAAAIAAAAIAPf/AAAAAAIAAAANAPX/AAAAAAIAAAAQAPb/AAAAAAIAAAASAPP/AAAAAAIAAAD5//r/AAAAAAIAAAD4//z/AAAAAAIAAAD3//j/AAAAAAIAAADv//z/AAAAAAIAAADt//3/AAAAAAIAAADx//v/AAAAAAIAAADw//D/AAAAAAIAAADz//L/AAAAAAIAAADz/+//AAAAAAIAAAD1//H/AAAAAAIAAADw//L/AAAAAAIAAADs//z/AAAAAAIAAADq//7/AAAAAAIAAADt//7/AAAAAAIAAAD7//j/AAAAAAIAAADr/wQAAAAAAAIAAADo/wUAAAAAAAIAAADr/wcAAAAAAAIAAADu/wYAAAAAAAIAAADl/wYAAAAAAAIAAADo/wgAAAAAAAIAAAALAAsAAAAAAAIAAAAOAAoAAAAAAAIAAAAOAAwAAAAAAAIAAAAQAAkAAAAAAAIAAAASAAsAAAAAAAIAAAATAAgAAAAAAAIAAAAbAP7/AAAAAAIAAAAYAPD/AAAAAAIAAAAWAO7/AAAAAAIAAAAaAO7/AAAAAAIAAAAKAO//AAAAAAIAAAAMAPH/AAAAAAIAAAAPAPL/AAAAAAIAAAADAPP/AAAAAAIAAAAEAPD/AAAAAAIAAAACAPH/AAAAAAIAAADt//L/AAAAAAIAAADs//D/AAAAAAIAAAD3/+//AAAAAAIAAADq//f/AAAAAAIAAAAPAPz/AAAAAAIAAAALAAMAAAAAAAIAAAANAAIAAAAAAAIAAAANAAQAAAAAAAIAAAAMAAEAAAAAAAIAAAD3/wIAAAAAAAIAAAD5/wEAAAAAAAIAAAD2/wEAAAAAAAIAAAD3/wAAAAAAAAIAAAAUAP7/AQAAAAcAAAAZAP3/AAAAAAIAAAABAAIAAAACAAAAAAA=")
 tile_set = SubResource("TileSet_oi8ly")
 
+[node name="NPC2" parent="ObstacleLayer" instance=ExtResource("6_nr542")]
+position = Vector2(-251, -27)
+dialog_lines = Array[String](["Hi! There are rumors of a cave in the east.", "Maybe you should check it out.", "But be careful. It could be dangerous!"])
+
+[node name="Sprite2D" parent="ObstacleLayer/NPC2" index="0"]
+texture = SubResource("AtlasTexture_g3lhp")
+
+[node name="NPCIcon" parent="ObstacleLayer/NPC2/CanvasLayer/DialogBoxTexture" index="0"]
+texture = ExtResource("8_dc78n")
+
+[node name="DialogLabel" parent="ObstacleLayer/NPC2/CanvasLayer" index="1"]
+text = "Hi! There are rumors of a cave to the east."
+
+[node name="NameLabel" parent="ObstacleLayer/NPC2/CanvasLayer" index="2"]
+text = "Green Ninja"
+
+[node name="NPC" parent="ObstacleLayer" instance=ExtResource("6_nr542")]
+position = Vector2(-28, -31)
+dialog_lines = Array[String](["Hello there!", "What a beautiful forest this is!", "Bye now!"])
+
 [node name="Player" parent="ObstacleLayer" instance=ExtResource("1_2p8i2")]
 motion_mode = 1
 
@@ -829,32 +846,12 @@ motion_mode = 1
 position = Vector2(0, 1)
 zoom = Vector2(5, 5)
 
-[node name="NPC" parent="ObstacleLayer" instance=ExtResource("6_nr542")]
-position = Vector2(-26, -32)
-
-[node name="NPC2" parent="ObstacleLayer" instance=ExtResource("6_nr542")]
-position = Vector2(-251, -25)
-
-[node name="Sprite2D" parent="ObstacleLayer/NPC2" index="0"]
-texture = SubResource("AtlasTexture_dc78n")
-
-[node name="NPCIcon" parent="ObstacleLayer/NPC2/CanvasLayer/DialogBoxTexture" index="0"]
-texture = ExtResource("8_dc78n")
-
-[node name="DialogLabel" parent="ObstacleLayer/NPC2/CanvasLayer" index="1"]
-text = "Hi! There are rumors of a cave in the east."
-
-[node name="NameLabel" parent="ObstacleLayer/NPC2/CanvasLayer" index="2"]
-text = "Green Ninja"
-
 [node name="NPC3" parent="ObstacleLayer" instance=ExtResource("6_nr542")]
-position = Vector2(291, -28)
+position = Vector2(290, -24)
+dialog_lines = Array[String](["Mwahahaha! Turn back now.", "My lair is guarded by dark magic.", "Enter at your own risk!"])
 
 [node name="Sprite2D" parent="ObstacleLayer/NPC3" index="0"]
-texture = SubResource("AtlasTexture_njm7v")
-
-[node name="DialogBoxTexture" parent="ObstacleLayer/NPC3/CanvasLayer" index="0"]
-texture = SubResource("CompressedTexture2D_6qy3m")
+texture = SubResource("AtlasTexture_6qy3m")
 
 [node name="NPCIcon" parent="ObstacleLayer/NPC3/CanvasLayer/DialogBoxTexture" index="0"]
 texture = ExtResource("10_njm7v")
@@ -863,7 +860,7 @@ texture = ExtResource("10_njm7v")
 text = "Mwahahahaha!!"
 
 [node name="NameLabel" parent="ObstacleLayer/NPC3/CanvasLayer" index="2"]
-text = "Black Ninja Mage"
+text = "Dark Ninja Mage"
 
 [node name="LockedDoor" parent="." instance=ExtResource("6_elpgg")]
 position = Vector2(336, -20)
