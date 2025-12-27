@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://cu4wn0yqmol53"]
+[gd_scene load_steps=25 format=4 uid="uid://cu4wn0yqmol53"]
 
 [ext_resource type="PackedScene" uid="uid://d0hdrurd0b7vf" path="res://Scenes/Player/player.tscn" id="1_2p8i2"]
 [ext_resource type="Texture2D" uid="uid://ufhsskvlljn6" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetFloor.png" id="1_l6yvh"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://m4fw6a4vopp1" path="res://Ninja Adventure - Asset Pack/Actor/Characters/NinjaMageBlack/SpriteSheet.png" id="9_6qy3m"]
 [ext_resource type="Texture2D" uid="uid://6p2ony7pqh4w" path="res://Ninja Adventure - Asset Pack/Actor/Characters/NinjaMageBlack/Faceset.png" id="10_njm7v"]
 [ext_resource type="PackedScene" uid="uid://cwf0w0dfdylkq" path="res://Scenes/Switch/switch.tscn" id="11_bkvnf"]
+[ext_resource type="AudioStream" uid="uid://dxkjicyymr5ta" path="res://Ninja Adventure - Asset Pack/Musics/11 - Clearing.ogg" id="15_rpdpv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_04h35"]
 texture = ExtResource("1_l6yvh")
@@ -907,6 +908,13 @@ shape = SubResource("RectangleShape2D_nr542")
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="PuzzleWalls"]
 position = Vector2(48, -1)
 shape = SubResource("RectangleShape2D_nr542")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("15_rpdpv")
+volume_db = -5.0
+autoplay = true
+parameters/looping = true
 
 [connection signal="pressed" from="PuzzleButton" to="LockedDoor" method="_on_puzzle_button_pressed"]
 [connection signal="unpressed" from="PuzzleButton" to="LockedDoor" method="_on_puzzle_button_unpressed"]

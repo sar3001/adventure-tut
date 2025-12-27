@@ -1,7 +1,14 @@
 extends StaticBody2D
 
-var can_interact: bool = false
+@export var chest_name: String
+
+var can_interact: bool = false #player script turns on/off
 var is_open: bool = false
+
+func _ready() -> void:
+	if SceneManager.opened_chests.has(chest_name):
+		is_open = true
+		$AnimatedSprite2D.play("open")
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("Interact") and can_interact:
@@ -14,6 +21,8 @@ func open_chest():
 	$AnimatedSprite2D.play("open")
 	$Sprite2D.visible = true
 	$Timer.start()
+	SceneManager.opened_chests.append(chest_name)
+	$AudioStreamPlayer2D.play()
 
 
 func _on_timer_timeout() -> void:
