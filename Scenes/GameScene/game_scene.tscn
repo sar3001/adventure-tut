@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://du3umiy4j7pyb" path="res://Ninja Adventure - Asset Pack/Actor/Characters/NinjaGreen/Faceset.png" id="8_dc78n"]
 [ext_resource type="Texture2D" uid="uid://m4fw6a4vopp1" path="res://Ninja Adventure - Asset Pack/Actor/Characters/NinjaMageBlack/SpriteSheet.png" id="9_6qy3m"]
 [ext_resource type="Texture2D" uid="uid://6p2ony7pqh4w" path="res://Ninja Adventure - Asset Pack/Actor/Characters/NinjaMageBlack/Faceset.png" id="10_njm7v"]
-[ext_resource type="PackedScene" uid="uid://cwf0w0dfdylkq" path="res://Scenes/Switch/switch.tscn" id="11_bkvnf"]
+[ext_resource type="PackedScene" uid="uid://djmccsg038alh" path="res://Scenes/Enemies/slime_enemy.tscn" id="11_rpdpv"]
 [ext_resource type="AudioStream" uid="uid://dxkjicyymr5ta" path="res://Ninja Adventure - Asset Pack/Musics/11 - Clearing.ogg" id="15_rpdpv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_04h35"]
@@ -876,8 +876,8 @@ text = "Mwahahahaha!!"
 [node name="NameLabel" parent="ObstacleLayer/NPC3/CanvasLayer" index="2"]
 text = "Dark Ninja Mage"
 
-[node name="Switch" parent="ObstacleLayer" instance=ExtResource("11_bkvnf")]
-position = Vector2(25, -37)
+[node name="SlimeEnemy" parent="ObstacleLayer" instance=ExtResource("11_rpdpv")]
+position = Vector2(24, -35)
 
 [node name="LockedDoor" parent="." instance=ExtResource("6_elpgg")]
 position = Vector2(336, -20)

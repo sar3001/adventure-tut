@@ -80,3 +80,14 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.is_in_group("interactable"):
 		body.can_interact = false
+
+
+func _on_hitbox_area_2d_body_entered(body: Node2D) -> void:
+	SceneManager.player_hp -= 1
+	print(SceneManager.player_hp)
+	if SceneManager.player_hp <= 0:
+		die()
+	
+func die():
+	SceneManager.player_hp = 3
+	get_tree().reload_current_scene.call_deferred() # similar phrasing to scene entrance call_deferred
