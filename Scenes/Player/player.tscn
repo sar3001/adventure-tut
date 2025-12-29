@@ -1,8 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://d0hdrurd0b7vf"]
+[gd_scene load_steps=33 format=3 uid="uid://d0hdrurd0b7vf"]
 
 [ext_resource type="Script" uid="uid://coq5600e2s276" path="res://Scenes/Player/player.gd" id="1_a3d8c"]
 [ext_resource type="Texture2D" uid="uid://d0yeloxghfvyv" path="res://Ninja Adventure - Asset Pack/Actor/Characters/NinjaRed2/SeparateAnim/Walk.png" id="2_a3d8c"]
 [ext_resource type="Texture2D" uid="uid://dc3lfkt4mcmh6" path="res://Ninja Adventure - Asset Pack/Items/Scroll/ScrollEmpty.png" id="3_xpcdj"]
+[ext_resource type="Texture2D" uid="uid://75xsf5j8hj20" path="res://Ninja Adventure - Asset Pack/Ui/LifeReceptacle/heart_2.png" id="4_mtuoh"]
+[ext_resource type="Texture2D" uid="uid://dctb706ipdmqm" path="res://Ninja Adventure - Asset Pack/Items/Weapons/BigSword/Sprite.png" id="5_htcer"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a3d8c"]
 atlas = ExtResource("2_a3d8c")
@@ -152,6 +154,60 @@ radius = 3.0
 [sub_resource type="LabelSettings" id="LabelSettings_mtuoh"]
 font_size = 48
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_hnuln"]
+atlas = ExtResource("4_mtuoh")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aqm4k"]
+atlas = ExtResource("4_mtuoh")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rcvs5"]
+atlas = ExtResource("4_mtuoh")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8ma5"]
+atlas = ExtResource("4_mtuoh")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eksi1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hnuln")
+}],
+"loop": true,
+"name": &"0hp",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aqm4k")
+}],
+"loop": true,
+"name": &"1hp",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rcvs5")
+}],
+"loop": true,
+"name": &"2hp",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8ma5")
+}],
+"loop": true,
+"name": &"3hp",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dd0ac"]
+size = Vector2(10, 20)
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 7
@@ -188,9 +244,9 @@ debug_color = Color(0.94473004, 0.20365131, 0.3159419, 0.41960785)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Panel" type="Panel" parent="CanvasLayer"]
-offset_left = 47.0
+offset_left = 144.0
 offset_top = 53.0
-offset_right = 217.0
+offset_right = 314.0
 offset_bottom = 123.0
 
 [node name="TreasureLabel" type="Label" parent="CanvasLayer/Panel"]
@@ -210,6 +266,33 @@ offset_right = 159.0
 offset_bottom = 68.0
 texture = ExtResource("3_xpcdj")
 
+[node name="HpBar" type="AnimatedSprite2D" parent="CanvasLayer"]
+unique_name_in_owner = true
+position = Vector2(90.99999, 85.99999)
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_eksi1")
+animation = &"2hp"
+
+[node name="Sword" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -13)
+texture = ExtResource("5_htcer")
+
+[node name="SwordArea2D" type="Area2D" parent="Sword"]
+unique_name_in_owner = true
+collision_layer = 2
+collision_mask = 16
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sword/SwordArea2D"]
+shape = SubResource("RectangleShape2D_dd0ac")
+
+[node name="AttackDurationTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="body_entered" from="InteractArea2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="InteractArea2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="body_entered" from="HitboxArea2D" to="." method="_on_hitbox_area_2d_body_entered"]
+[connection signal="body_entered" from="Sword/SwordArea2D" to="." method="_on_sword_area_2d_body_entered"]
+[connection signal="timeout" from="AttackDurationTimer" to="." method="_on_attack_duration_timer_timeout"]

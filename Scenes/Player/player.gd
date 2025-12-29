@@ -7,6 +7,7 @@ class_name Player
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	update_treasure_label() #mkes sure label is updated if the player changes scenes
+	update_hp_bar() #gets loaded during scene changes
 	if SceneManager.player_spawn_position != Vector2(0,0):
 		position = SceneManager.player_spawn_position
 	
@@ -18,6 +19,9 @@ func _physics_process(delta: float) -> void:
 	move_player()
 
 	push_blocks()
+	
+	if Input.is_action_just_pressed("Interact"):
+		attack()
 	
 	update_treasure_label()
 	
@@ -84,10 +88,37 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 
 func _on_hitbox_area_2d_body_entered(body: Node2D) -> void:
 	SceneManager.player_hp -= 1
-	print(SceneManager.player_hp)
+	update_hp_bar()
 	if SceneManager.player_hp <= 0:
 		die()
 	
 func die():
 	SceneManager.player_hp = 3
 	get_tree().reload_current_scene.call_deferred() # similar phrasing to scene entrance call_deferred
+
+func update_hp_bar():
+	if SceneManager.player_hp >= 3:
+		%HpBar.play("3hp")
+		
+	elif SceneManager.player_hp == 2:
+		%HpBar.play("2hp")
+		
+	elif SceneManager.player_hp == 1:
+		%HpBar.play("1hp")
+		
+	else:
+		%HpBar.play("0hp")
+	
+	
+func attack():
+	$Sword.visible = true
+	%SwordArea2D.monitoring = true
+	$AttackDurationTimer.start()
+
+func _on_sword_area_2d_body_entered(body: Node2D) -> void:
+	body.queue_free()
+
+
+func _on_attack_duration_timer_timeout() -> void:
+	$Sword.visible = false
+	%SwordArea2D.monitoring = false

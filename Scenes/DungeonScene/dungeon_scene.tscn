@@ -922,7 +922,7 @@ position = Vector2(26, -23)
 position = Vector2(65, -35)
 
 [node name="TreasureChest" parent="." instance=ExtResource("13_x00t5")]
-position = Vector2(-69, 1)
+position = Vector2(-244, -260)
 chest_name = "chest1"
 
 [node name="TreasureChest2" parent="." instance=ExtResource("13_x00t5")]

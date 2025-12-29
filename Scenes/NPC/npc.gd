@@ -7,7 +7,7 @@ var dialog_index: int = 0
 
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("Interact") and can_interact: #both must be true
+	if Input.is_action_just_pressed("Interact") and can_interact: #both must be true. can_interct is made true by player script
 		$AudioStreamPlayer2D.play()
 		if dialog_index < dialog_lines.size():
 			$CanvasLayer.visible = true
