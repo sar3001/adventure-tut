@@ -3,6 +3,7 @@ class_name Player
 
 @export var move_speed: float = 100
 @export var push_strength: float = 10
+@export var acceleration: float = 10
 
 var is_attacking: bool = false
 
@@ -33,7 +34,9 @@ func _physics_process(delta: float) -> void:
 func move_player():
 	var move_vector: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	
-	velocity = move_vector * move_speed # Best practice to use velocity to move the player. Don't use position. Both velocity and move_vector are Vec2
+	#velocity = move_vector * move_speed # Best practice to use velocity to move the player. Don't use position. Both velocity and move_vector are Vec2
+	velocity = velocity.move_toward(move_vector * move_speed, acceleration) #every frame, it will move the player over a period of time.
+	#This is so that it can not immediately overwrite the velocit from "on hitbox area..." function.
 	
 	if velocity.x > 0:
 		$AnimatedSprite2D.play("move_right")
@@ -94,6 +97,12 @@ func _on_hitbox_area_2d_body_entered(body: Node2D) -> void:
 	update_hp_bar()
 	if SceneManager.player_hp <= 0:
 		die()
+		
+	var distance_to_player: Vector2 = global_position - body.global_position #want to knock the player backwards (not forwards).
+	var knockback_direction: Vector2 = distance_to_player.normalized()
+	
+	var knockback_strength: float = 200
+	velocity += knockback_direction * knockback_strength
 	
 func die():
 	SceneManager.player_hp = 3
@@ -136,7 +145,16 @@ func attack():
 		$AnimationPlayer.play("attack_down")
 
 func _on_sword_area_2d_body_entered(body: Node2D) -> void:
-	body.queue_free()
+	#same as in slime_enemy script but switched. knockback direction is the same as players direction
+	var distance_to_enemy: Vector2 = body.global_position - global_position #knocking the enemy backwards
+	var knockback_direction: Vector2 = distance_to_enemy.normalized()
+	
+	var knockback_strength: float = 150
+	
+	body.velocity += knockback_direction * knockback_strength
+	body.HP -= 1
+	if body.HP <= 0:
+		body.queue_free()
 
 
 func _on_attack_duration_timer_timeout() -> void:

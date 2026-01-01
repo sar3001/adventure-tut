@@ -877,7 +877,7 @@ text = "Mwahahahaha!!"
 text = "Dark Ninja Mage"
 
 [node name="SlimeEnemy" parent="ObstacleLayer" instance=ExtResource("11_rpdpv")]
-position = Vector2(24, -35)
+position = Vector2(44, -81)
 
 [node name="LockedDoor" parent="." instance=ExtResource("6_elpgg")]
 position = Vector2(336, -20)
