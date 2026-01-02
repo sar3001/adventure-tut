@@ -18,7 +18,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-
+	if SceneManager.player_hp <= 0:
+		return #will stop running the physics process function f if player is dead.
+	
 	if not is_attacking:
 		move_player()
 
@@ -104,9 +106,23 @@ func _on_hitbox_area_2d_body_entered(body: Node2D) -> void:
 	var knockback_strength: float = 200
 	velocity += knockback_direction * knockback_strength
 	
+	var flash_white_color: Color = Color(50, 50, 50)
+	modulate = flash_white_color #flashes white when hit
+	
+	await get_tree().create_timer(0.2).timeout
+	
+	var original_color: Color = Color(1, 1, 1)
+	modulate = original_color
+	
 func die():
+	$AnimatedSprite2D.play("death")
+	if $DeathTimer.is_stopped():
+		$DeathTimer.start()
+		
+func _on_death_timer_timeout() -> void:
 	SceneManager.player_hp = 3
 	get_tree().reload_current_scene.call_deferred() # similar phrasing to scene entrance call_deferred
+	
 
 func update_hp_bar():
 	if SceneManager.player_hp >= 3:
@@ -123,6 +139,9 @@ func update_hp_bar():
 	
 	
 func attack():
+	if not $AttackDurationTimer.is_stopped(): #makes sure that the timer runs out before attack can begin again
+		return #stops running the function
+		
 	$Sword.visible = true
 	%SwordArea2D.monitoring = true
 	$AttackDurationTimer.start()
@@ -155,7 +174,18 @@ func _on_sword_area_2d_body_entered(body: Node2D) -> void:
 	body.HP -= 1
 	if body.HP <= 0:
 		body.queue_free()
-
+		
+	var flash_red_color: Color = Color(10, 0, 0)
+	body.modulate = flash_red_color
+	
+	await get_tree().create_timer(0.2).timeout
+	
+	#can't set the modulate back if slime is dead before .2 seconds, so:
+	##if object is deleted in Godot, object is not null, so cannot wire "if object(body):"
+	if is_instance_valid(body): 
+		var original_color: Color = Color(1, 1, 1)
+		body.modulate = original_color
+	
 
 func _on_attack_duration_timer_timeout() -> void:
 	$Sword.visible = false
