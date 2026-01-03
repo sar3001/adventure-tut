@@ -6,6 +6,7 @@ class_name Player
 @export var acceleration: float = 10
 
 var is_attacking: bool = false
+var can_interact: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -26,7 +27,7 @@ func _physics_process(delta: float) -> void:
 
 	push_blocks()
 	
-	if Input.is_action_just_pressed("Interact"):
+	if Input.is_action_just_pressed("Interact") and not can_interact:
 		attack()
 	
 	update_treasure_label()
@@ -86,11 +87,13 @@ func update_treasure_label():
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("interactable"):
+		can_interact = true
 		body.can_interact = true
 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.is_in_group("interactable"):
+		can_interact = false
 		body.can_interact = false
 
 
@@ -105,6 +108,8 @@ func _on_hitbox_area_2d_body_entered(body: Node2D) -> void:
 	
 	var knockback_strength: float = 200
 	velocity += knockback_direction * knockback_strength
+	
+	$DamageSFX.play()
 	
 	var flash_white_color: Color = Color(50, 50, 50)
 	modulate = flash_white_color #flashes white when hit
@@ -141,7 +146,8 @@ func update_hp_bar():
 func attack():
 	if not $AttackDurationTimer.is_stopped(): #makes sure that the timer runs out before attack can begin again
 		return #stops running the function
-		
+	
+	$SwordSFX.play()
 	$Sword.visible = true
 	%SwordArea2D.monitoring = true
 	$AttackDurationTimer.start()
@@ -165,26 +171,15 @@ func attack():
 
 func _on_sword_area_2d_body_entered(body: Node2D) -> void:
 	#same as in slime_enemy script but switched. knockback direction is the same as players direction
+	#this part is not in the slime enemy script because it depends on the player's position.
 	var distance_to_enemy: Vector2 = body.global_position - global_position #knocking the enemy backwards
 	var knockback_direction: Vector2 = distance_to_enemy.normalized()
 	
 	var knockback_strength: float = 150
 	
 	body.velocity += knockback_direction * knockback_strength
-	body.HP -= 1
-	if body.HP <= 0:
-		body.queue_free()
-		
-	var flash_red_color: Color = Color(10, 0, 0)
-	body.modulate = flash_red_color
 	
-	await get_tree().create_timer(0.2).timeout
-	
-	#can't set the modulate back if slime is dead before .2 seconds, so:
-	##if object is deleted in Godot, object is not null, so cannot wire "if object(body):"
-	if is_instance_valid(body): 
-		var original_color: Color = Color(1, 1, 1)
-		body.modulate = original_color
+	body.take_damage()
 	
 
 func _on_attack_duration_timer_timeout() -> void:

@@ -1,7 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://djmccsg038alh"]
+[gd_scene load_steps=26 format=3 uid="uid://djmccsg038alh"]
 
 [ext_resource type="Script" uid="uid://bf5y662mffdm2" path="res://Scenes/Enemies/slime_enemy.gd" id="1_5uyk1"]
 [ext_resource type="Texture2D" uid="uid://c3wek6y7n1qrg" path="res://Ninja Adventure - Asset Pack/Actor/Monsters/Slime3/Slime3.png" id="1_p6sbt"]
+[ext_resource type="AudioStream" uid="uid://cvn4acmlqbmln" path="res://Ninja Adventure - Asset Pack/Sounds/Game/Hit1.wav" id="3_sv1en"]
+[ext_resource type="Texture2D" uid="uid://7pnl8nj5h6vs" path="res://Ninja Adventure - Asset Pack/FX/Particle/Clouds.png" id="4_1u7tg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sv1en"]
 radius = 63.007935
@@ -156,6 +158,21 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_1u7tg"]
 radius = 7.0
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jwhlm"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 30.0
+initial_velocity_max = 60.0
+angular_velocity_min = -156.52002
+angular_velocity_max = -156.52002
+orbit_velocity_min = -0.19599992
+orbit_velocity_max = 0.2830001
+scale_min = 0.02
+scale_max = 0.089999996
+color = Color(0.27058825, 0.67058825, 0.7607843, 1)
+hue_variation_min = -0.08000002
+hue_variation_max = 0.079999976
+
 [node name="SlimeEnemy" type="CharacterBody2D"]
 collision_layer = 16
 motion_mode = 1
@@ -177,5 +194,18 @@ autoplay = "default"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_1u7tg")
+
+[node name="DamageSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_sv1en")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 60
+texture = ExtResource("4_1u7tg")
+lifetime = 0.8
+one_shot = true
+explosiveness = 0.8
+collision_base_size = 0.0
+process_material = SubResource("ParticleProcessMaterial_jwhlm")
 
 [connection signal="body_entered" from="PlayerDetectArea2D" to="." method="_on_player_detect_area_2d_body_entered"]

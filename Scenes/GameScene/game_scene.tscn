@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://cu4wn0yqmol53"]
+[gd_scene load_steps=26 format=4 uid="uid://cu4wn0yqmol53"]
 
 [ext_resource type="PackedScene" uid="uid://d0hdrurd0b7vf" path="res://Scenes/Player/player.tscn" id="1_2p8i2"]
 [ext_resource type="Texture2D" uid="uid://ufhsskvlljn6" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetFloor.png" id="1_l6yvh"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://m4fw6a4vopp1" path="res://Ninja Adventure - Asset Pack/Actor/Characters/NinjaMageBlack/SpriteSheet.png" id="9_6qy3m"]
 [ext_resource type="Texture2D" uid="uid://6p2ony7pqh4w" path="res://Ninja Adventure - Asset Pack/Actor/Characters/NinjaMageBlack/Faceset.png" id="10_njm7v"]
 [ext_resource type="PackedScene" uid="uid://djmccsg038alh" path="res://Scenes/Enemies/slime_enemy.tscn" id="11_rpdpv"]
+[ext_resource type="PackedScene" uid="uid://tveqgiha1a0i" path="res://Scenes/TreasureChest/treasure_chest.tscn" id="12_6dkqd"]
 [ext_resource type="AudioStream" uid="uid://dxkjicyymr5ta" path="res://Ninja Adventure - Asset Pack/Musics/11 - Clearing.ogg" id="15_rpdpv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_04h35"]
@@ -878,6 +879,41 @@ text = "Dark Ninja Mage"
 
 [node name="SlimeEnemy" parent="ObstacleLayer" instance=ExtResource("11_rpdpv")]
 position = Vector2(44, -81)
+
+[node name="SlimeEnemy2" parent="ObstacleLayer" instance=ExtResource("11_rpdpv")]
+position = Vector2(-107, -221)
+
+[node name="SlimeEnemy3" parent="ObstacleLayer" instance=ExtResource("11_rpdpv")]
+position = Vector2(-67, -240)
+
+[node name="TreasureChest" parent="ObstacleLayer" instance=ExtResource("12_6dkqd")]
+position = Vector2(259, -281)
+chest_name = "chest4"
+
+[node name="SlimeEnemy4" parent="ObstacleLayer" instance=ExtResource("11_rpdpv")]
+position = Vector2(288, -259)
+
+[node name="SlimeEnemy5" parent="ObstacleLayer" instance=ExtResource("11_rpdpv")]
+position = Vector2(340, -238)
+
+[node name="TreasureChest2" parent="ObstacleLayer" instance=ExtResource("12_6dkqd")]
+position = Vector2(-273, 177)
+chest_name = "chest5"
+
+[node name="SlimeEnemy6" parent="ObstacleLayer" instance=ExtResource("11_rpdpv")]
+position = Vector2(-230, 113)
+
+[node name="SlimeEnemy7" parent="ObstacleLayer" instance=ExtResource("11_rpdpv")]
+position = Vector2(-306, 151)
+
+[node name="SlimeEnemy8" parent="ObstacleLayer" instance=ExtResource("11_rpdpv")]
+position = Vector2(-212, 174)
+
+[node name="SlimeEnemy9" parent="ObstacleLayer" instance=ExtResource("11_rpdpv")]
+position = Vector2(367, -196)
+
+[node name="SlimeEnemy10" parent="ObstacleLayer" instance=ExtResource("11_rpdpv")]
+position = Vector2(-162, -181)
 
 [node name="LockedDoor" parent="." instance=ExtResource("6_elpgg")]
 position = Vector2(336, -20)
