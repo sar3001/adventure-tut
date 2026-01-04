@@ -932,7 +932,6 @@ chest_name = "chest2"
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_r5l8u")
 volume_db = -5.0
-autoplay = true
 parameters/looping = true
 
 [connection signal="pressed" from="PuzzleButton" to="LockedDoor" method="_on_puzzle_button_pressed"]

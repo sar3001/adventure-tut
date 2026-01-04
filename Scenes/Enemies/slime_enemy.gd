@@ -75,7 +75,7 @@ func play_damage_sfx():
 func die():
 	$GPUParticles2D.emitting = true
 	$AnimatedSprite2D.visible = false
-	$CollisionShape2D.call_deferred("is_disabled", true)
+	$CollisionShape2D.set_deferred("disabled", true) #use set deferred instead of call deferred
 	
 	
 	await get_tree().create_timer(.8).timeout
